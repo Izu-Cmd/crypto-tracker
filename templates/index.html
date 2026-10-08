@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>crypto-tracker · live top 10</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <header>
+    <h1>crypto<span>tracker</span></h1>
+    <p class="tagline">live prices for the top {{ coins|length }} coins · auto-refresh every 30s</p>
+    <p class="status" id="status">connecting…</p>
+  </header>
+
+  <main>
+    <table id="coin-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Coin</th>
+          <th class="right">Price</th>
+          <th class="right">24h</th>
+          <th class="right">Market cap</th>
+          <th>Last 7d</th>
+        </tr>
+      </thead>
+      <tbody id="coin-rows">
+        {% for sym, cid, name in coins %}
+        <tr data-coin="{{ cid }}">
+          <td class="rank">—</td>
+          <td class="name">
+            <span class="symbol">{{ name }}</span>
+            <span class="sub">{{ sym|upper }}</span>
+          </td>
+          <td class="right price">—</td>
+          <td class="right change">—</td>
+          <td class="right cap">—</td>
+          <td class="spark"><svg viewBox="0 0 100 30" preserveAspectRatio="none" width="100" height="30"></svg></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+
+  <footer>
+    <p>Data from <a href="https://www.coingecko.com" target="_blank" rel="noopener">CoinGecko</a> · cached server-side for {{ 30 }}s &middot; built by Izu</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

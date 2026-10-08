@@ -1,0 +1,1 @@
+"""tracker package — CoinGecko client + coin configuration."""
